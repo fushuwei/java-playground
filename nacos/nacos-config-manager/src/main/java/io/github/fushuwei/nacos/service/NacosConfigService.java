@@ -1,20 +1,16 @@
 package io.github.fushuwei.nacos.service;
 
-import com.alibaba.nacos.api.NacosFactory;
 import com.alibaba.nacos.api.config.ConfigService;
 import com.alibaba.nacos.api.config.ConfigType;
 import com.alibaba.nacos.api.exception.NacosException;
-import io.github.fushuwei.nacos.config.ConfigManagerProperties;
 import io.github.fushuwei.nacos.entity.ConfigMetadata;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Properties;
-
 /**
- * Nacos配置服务类
+ * Nacos配置服务类（使用Bean注入方式）
  *
  * @author example
  * @version 1.0.0
@@ -24,25 +20,7 @@ import java.util.Properties;
 public class NacosConfigService {
 
     @Autowired
-    private ConfigManagerProperties configManagerProperties;
-
     private ConfigService configService;
-
-    public NacosConfigService() {
-        try {
-            Properties properties = new Properties();
-            properties.put("serverAddr", configManagerProperties.getNacos().getServerAddr());
-            properties.put("username", configManagerProperties.getNacos().getUsername());
-            properties.put("password", configManagerProperties.getNacos().getPassword());
-
-            this.configService = NacosFactory.createConfigService(properties);
-            log.info("Nacos配置服务初始化成功, serverAddr: {}",
-                configManagerProperties.getNacos().getServerAddr());
-        } catch (NacosException e) {
-            log.error("Nacos配置服务初始化失败", e);
-            throw new RuntimeException("Nacos配置服务初始化失败", e);
-        }
-    }
 
     /**
      * 发布配置
@@ -79,8 +57,8 @@ public class NacosConfigService {
     /**
      * 获取配置
      *
-     * @param dataId    数据ID
-     * @param group     分组
+     * @param dataId 数据ID
+     * @param group 分组
      * @param timeoutMs 超时时间
      * @return 配置内容
      */
@@ -97,7 +75,7 @@ public class NacosConfigService {
      * 删除配置
      *
      * @param dataId 数据ID
-     * @param group  分组
+     * @param group 分组
      * @return 删除结果
      */
     public boolean removeConfig(String dataId, String group) {
@@ -113,7 +91,7 @@ public class NacosConfigService {
      * 检查配置是否存在
      *
      * @param dataId 数据ID
-     * @param group  分组
+     * @param group 分组
      * @return 是否存在
      */
     public boolean configExists(String dataId, String group) {
