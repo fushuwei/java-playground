@@ -47,13 +47,6 @@
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <release>${maven.compiler.release}</release>
-                        <annotationProcessorPaths>
-                            <path>
-                                <groupId>org.projectlombok</groupId>
-                                <artifactId>lombok</artifactId>
-                                <version>${lombok.version}</version>
-                            </path>
-                        </annotationProcessorPaths>
                     </configuration>
                 </plugin>
 
@@ -67,9 +60,6 @@
                             <goals>
                                 <goal>repackage</goal>
                             </goals>
-                            <configuration>
-                                <classifier>exec</classifier>
-                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
