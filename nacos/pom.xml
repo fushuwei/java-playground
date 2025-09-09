@@ -14,7 +14,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>nacos-bootstrap</module>
+        <module>nacos-config-manager</module>
     </modules>
 
 </project>

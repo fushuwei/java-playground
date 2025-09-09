@@ -1,4 +1,4 @@
-# nacos-bootstrap
+# nacos-config-manager
 
 ## 简介
 

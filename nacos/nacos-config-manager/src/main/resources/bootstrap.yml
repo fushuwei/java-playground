@@ -1,0 +1,73 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: nacos-config-manager          # 构成 Data-ID 的前半部分
+  profiles:
+    active: dev                # 构成 Data-ID 的后半部分 → user-center-dev.yml
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 172.16.11.128:8848   # 集群地址
+        namespace: lisi                 # 命名空间 ID（控制台复制）
+        group: DEFAULT_GROUP                                            # 业务分组
+        username: nacos                                                 # 3.x 默认开启鉴权
+        password: 123456                                                 # 生产请替换 & 加密
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}        # 共用地址
+        namespace: ${spring.cloud.nacos.discovery.namespace}              # 同上
+        group: ${spring.cloud.nacos.discovery.group}                      # 同上
+        username: ${spring.cloud.nacos.discovery.username}
+        password: ${spring.cloud.nacos.discovery.password}
+        file-extension: yml                                               # 远程配置格式
+        refresh-enabled: true                                             # 开启动态刷新
+        # 主配置 Data-ID = ${spring.application.name}-${spring.profiles.active}.${file-extension}
+        # 额外共享配置（Data-ID 维度，可跨应用复用）
+        # shared-configs:
+        #   - data-id: common-mysql.yml
+        #     group: DEFAULT_GROUP
+        #     refresh: true
+        #   - data-id: common-redis.yml
+        #     group: DEFAULT_GROUP
+        #     refresh: true
+        # # 业务内部扩展配置（仅本应用用）
+        # extension-configs:
+        #   - data-id: user-center-rule.yml
+        #     group: DEFAULT_GROUP
+        #     refresh: true
+        import-check:
+          enabled: false
+
+# 配置管理相关设置
+config:
+  manager:
+    # 配置文件根目录
+    config-root-path: configs
+    # 是否启用配置同步
+    sync-enabled: true
+    # 同步模式: STARTUP(启动时同步) | SCHEDULE(定时同步) | BOTH(两者都启用)
+    sync-mode: STARTUP
+    # 定时同步间隔(分钟)
+    sync-interval: 30
+    # 是否覆盖已存在的配置
+    override-existing: true
+    # 配置备份
+    backup-enabled: true
+    backup-path: backup
+    # 支持的环境列表
+    environments:
+      - dev
+      - test
+      - prod
+    # Nacos连接配置
+    nacos:
+      server-addr: localhost:8848
+      username: nacos
+      password: nacos
+      timeout: 5000
+
+logging:
+  level:
+    io.github.fushuwei.nacos: DEBUG
+    com.alibaba.nacos: INFO
