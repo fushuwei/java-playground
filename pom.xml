@@ -23,6 +23,7 @@
     </properties>
 
     <modules>
+        <module>MFA</module>
         <module>nacos</module>
     </modules>
 
