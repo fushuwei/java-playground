@@ -23,6 +23,7 @@
     </properties>
 
     <modules>
+        <module>java-basics</module>
         <module>MFA</module>
         <module>nacos</module>
     </modules>
