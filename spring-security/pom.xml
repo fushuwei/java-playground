@@ -10,11 +10,10 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>java-basics</artifactId>
+    <artifactId>spring-security</artifactId>
     <packaging>pom</packaging>
 
     <modules>
-        <module>time-related</module>
     </modules>
 
 </project>

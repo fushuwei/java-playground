@@ -10,7 +10,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>datetime-related</artifactId>
+    <artifactId>time-related</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
