@@ -17,6 +17,7 @@
     <description>Spring Security 相关项目</description>
 
     <modules>
+        <module>spring-security-helloworld</module>
     </modules>
 
     <properties>
