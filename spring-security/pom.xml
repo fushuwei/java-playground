@@ -18,6 +18,7 @@
 
     <modules>
         <module>spring-security-helloworld</module>
+        <module>spring-security-traditionalfilter</module>
     </modules>
 
     <properties>
