@@ -12,7 +12,6 @@
 
     <artifactId>spring-security</artifactId>
     <packaging>pom</packaging>
-
     <name>Spring Security</name>
     <description>Spring Security 相关项目</description>
 

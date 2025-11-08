@@ -12,7 +12,6 @@
 
     <artifactId>spring-security-helloworld</artifactId>
     <packaging>jar</packaging>
-
     <name>Spring Security HelloWorld</name>
     <description>Spring Security HelloWorld 目的是对 Spring Security 有个基本的认识</description>
 
