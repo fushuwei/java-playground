@@ -12,9 +12,11 @@
     <description>Java 练习场项目</description>
 
     <modules>
+        <module>jdbc</module>
+        <module>spring-security</module>
+
         <module>MFA</module>
         <module>nacos</module>
-        <module>spring-security</module>
     </modules>
 
     <properties>
