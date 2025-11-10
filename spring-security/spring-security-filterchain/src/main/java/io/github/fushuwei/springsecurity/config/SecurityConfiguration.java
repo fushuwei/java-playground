@@ -42,6 +42,9 @@ public class SecurityConfiguration {
             .build();
     }
 
+    /**
+     * 基于内存的用户认证管理器
+     */
     @Bean
     public InMemoryUserDetailsManager inMemoryUserDetailsManager(PasswordEncoder passwordEncoder) throws Exception {
         // 创建登录用户，这里的用户会覆盖 application.yml 中配置的用户和密码
