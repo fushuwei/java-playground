@@ -16,8 +16,11 @@
     <description>Spring Security 相关项目</description>
 
     <modules>
+        <!-- 从输出 Hello World 了解什么是 Spring Security -->
         <module>spring-security-helloworld</module>
+        <!-- 传统登录认证过滤器 -->
         <module>spring-security-traditionalfilter</module>
+        <!-- 了解什么是 Filter Chain 过滤器链 -->
         <module>spring-security-filterchain</module>
     </modules>
 

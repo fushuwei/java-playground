@@ -3,7 +3,10 @@ package io.github.fushuwei.springsecurity.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 public class SecurityConfiguration {
@@ -25,6 +28,11 @@ public class SecurityConfiguration {
      */
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.build();
+        return http.authorizeHttpRequests((requests) ->
+                requests.requestMatchers("/", "/resource/roles").permitAll().anyRequest().authenticated())
+            .formLogin(withDefaults())
+            .httpBasic(withDefaults())
+            .csrf(AbstractHttpConfigurer::disable)
+            .build();
     }
 }
