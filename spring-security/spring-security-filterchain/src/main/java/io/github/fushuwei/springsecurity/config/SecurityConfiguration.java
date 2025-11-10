@@ -4,6 +4,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -27,12 +33,31 @@ public class SecurityConfiguration {
      * 9、可以自定义多个 SecurityFilterChain Bean，每个 SecurityFilterChain 配置的过滤器都存储在独立的 DefaultSecurityFilterChain 实例中，由 FilterChainProxy 按顺序路由执行，互不干扰。
      */
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests((requests) ->
                 requests.requestMatchers("/", "/resource/roles").permitAll().anyRequest().authenticated())
             .formLogin(withDefaults())
-            .httpBasic(withDefaults())
-            .csrf(AbstractHttpConfigurer::disable)
+            .httpBasic(AbstractHttpConfigurer::disable)  // 关闭弹窗
+            .csrf(AbstractHttpConfigurer::disable)  // 禁用 CSRF
             .build();
+    }
+
+    @Bean
+    public InMemoryUserDetailsManager inMemoryUserDetailsManager(PasswordEncoder passwordEncoder) throws Exception {
+        // 创建登录用户，这里的用户会覆盖 application.yml 中配置的用户和密码
+        UserDetails user1 = User.withUsername("admin1").password("{noop}admin1").build();  // NoOpPasswordEncoder，密码不加密
+        UserDetails user2 = User.withUsername("admin2").password(passwordEncoder.encode("admin2")).build();  // BCryptPasswordEncoder, BCrypt加密（推荐）
+
+        // 将用户放入内存用户信息管理器中
+        return new InMemoryUserDetailsManager(user1, user2);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        // 只能 BCrypt 登录
+        // return new BCryptPasswordEncoder(12);
+
+        // 即可以 NoOp 登录，也可以 BCrypt 登录
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }
