@@ -1,18 +1,19 @@
 package io.github.fushuwei.springsecurity;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.github.fushuwei.springsecurity.mapper.UserMapper;
-import lombok.Data;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@Data
 @SpringBootTest
 public class UserTest {
 
-    private final UserMapper userMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     @Test
     public void queryAllUsers() {
-        userMapper.selectList(null);
+        userMapper.selectList(new QueryWrapper<>());
     }
 }
