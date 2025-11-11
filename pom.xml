@@ -14,9 +14,6 @@
     <modules>
         <module>jdbc</module>
         <module>spring-security</module>
-
-        <module>MFA</module>
-        <module>nacos</module>
     </modules>
 
     <properties>
