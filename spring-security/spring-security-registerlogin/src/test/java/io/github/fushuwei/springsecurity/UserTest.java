@@ -5,6 +5,7 @@ import io.github.fushuwei.springsecurity.mapper.UserMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootTest
 public class UserTest {
@@ -15,5 +16,12 @@ public class UserTest {
     @Test
     public void queryAllUsers() {
         userMapper.selectList(new QueryWrapper<>());
+    }
+
+    @Test
+    public void bcryptPassword() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodePassword = encoder.encode("admin");
+        System.out.println(encodePassword);
     }
 }
