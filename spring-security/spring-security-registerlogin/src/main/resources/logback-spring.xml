@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds">
+    <!-- 从 application.yml 配置中获取应用名称 -->
+    <springProperty name="APP_NAME" source="spring.application.name" defaultValue="application"/>
+
     <!-- 日志路径 -->
-    <property name="LOG_PATH" value="${LOG_PATH:-logs/spring-security}"/>
+    <property name="LOG_PATH" value="${LOG_PATH:-logs/${APP_NAME}}"/>
     <!-- 应用名称 -->
-    <property name="APP_NAME" value="spring-security-registerlogin"/>
+    <property name="APP_NAME" value="${APP_NAME}"/>
     <!-- 日志模式 -->
     <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n"/>
 
