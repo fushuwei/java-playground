@@ -22,6 +22,8 @@
         <module>spring-security-traditionalfilter</module>
         <!-- 了解什么是 Filter Chain 过滤器链 -->
         <module>spring-security-filterchain</module>
+        <!-- 模拟用户注册和登录功能 -->
+        <module>spring-security-registerlogin</module>
     </modules>
 
     <properties>
@@ -40,8 +42,8 @@
         <!-- Spring Cloud Alibaba 版本 -->
         <spring-cloud-alibaba.version>2025.0.0.0</spring-cloud-alibaba.version>
 
-        <!-- Lombok 版本 -->
-        <lombok.version>1.18.42</lombok.version>
+        <!-- Mybatis Plus 版本 -->
+        <mybatis-plus.version>3.5.14</mybatis-plus.version>
 
         <!-- MapStruct 版本 -->
         <mapstruct.version>1.6.3</mapstruct.version>
@@ -79,12 +81,11 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Lombok -->
+            <!-- MyBatis Plus -->
             <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-                <scope>provided</scope>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
             </dependency>
 
             <!-- MapStruct -->
