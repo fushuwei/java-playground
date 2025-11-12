@@ -28,7 +28,7 @@ public class SecurityConfiguration {
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests((requests) -> requests.anyRequest().authenticated())
+        return http.authorizeHttpRequests((requests) -> requests.requestMatchers("/user/*").permitAll().anyRequest().authenticated())
             .formLogin(withDefaults())
             .httpBasic(AbstractHttpConfigurer::disable)  // 关闭弹窗
             .csrf(AbstractHttpConfigurer::disable)  // 禁用 CSRF
