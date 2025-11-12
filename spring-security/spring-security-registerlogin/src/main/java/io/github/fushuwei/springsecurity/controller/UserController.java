@@ -5,7 +5,7 @@ import io.github.fushuwei.springsecurity.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +22,7 @@ public class UserController {
     public String add(@RequestBody UserDO userDO) {
         UserDetails user = User.builder()
             .username(userDO.getUsername())
-            .password(BCrypt.hashpw(userDO.getPassword(), BCrypt.gensalt()))
+            .password(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(userDO.getPassword()))
             .build();
         customUserDetailsService.createUser(user);
         return "添加用户成功！";

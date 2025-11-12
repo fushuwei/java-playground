@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsManager {
 
         return org.springframework.security.core.userdetails.User.builder()
             .username(user.getUsername())
-            .password("{bcrypt}" + user.getPassword())
+            .password(user.getPassword())
             .build();
     }
 
