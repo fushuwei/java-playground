@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 /**
  * 响应结果
  *
+ * @param <T> 响应数据类型
  * @author fushuwei
  */
 @Data
@@ -83,49 +84,49 @@ public class Result<T> implements Serializable {
     /**
      * 成功响应
      */
-    public static <T> Result<T> success() {
+    public static <T> Result<T> ok() {
         return new Result<>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), null, ResultType.SUCCESS);
     }
 
     /**
      * 成功响应（带数据）
      */
-    public static <T> Result<T> success(T data) {
+    public static <T> Result<T> ok(T data) {
         return new Result<>(ResultCode.SUCCESS.getCode(), ResultCode.SUCCESS.getMessage(), data, ResultType.SUCCESS);
     }
 
     /**
      * 成功响应（自定义消息）
      */
-    public static <T> Result<T> success(String message, T data) {
+    public static <T> Result<T> ok(String message, T data) {
         return new Result<>(ResultCode.SUCCESS.getCode(), message, data, ResultType.SUCCESS);
     }
 
     /**
      * 失败响应
      */
-    public static <T> Result<T> failure() {
+    public static <T> Result<T> fail() {
         return new Result<>(ResultCode.FAILURE.getCode(), ResultCode.FAILURE.getMessage(), null, ResultType.FAILURE);
     }
 
     /**
      * 失败响应（自定义消息）
      */
-    public static <T> Result<T> failure(String message) {
+    public static <T> Result<T> fail(String message) {
         return new Result<>(ResultCode.FAILURE.getCode(), message, null, ResultType.FAILURE);
     }
 
     /**
      * 警告响应
      */
-    public static <T> Result<T> warning(String message) {
+    public static <T> Result<T> warn(String message) {
         return new Result<>(ResultCode.WARNING.getCode(), message, null, ResultType.WARNING);
     }
 
     /**
      * 警告响应（带数据）
      */
-    public static <T> Result<T> warning(String message, T data) {
+    public static <T> Result<T> warn(String message, T data) {
         return new Result<>(ResultCode.WARNING.getCode(), message, data, ResultType.WARNING);
     }
 
