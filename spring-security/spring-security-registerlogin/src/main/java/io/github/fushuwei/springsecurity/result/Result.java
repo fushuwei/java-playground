@@ -147,7 +147,7 @@ public class Result<T> implements Serializable {
     /**
      * 需要二次确认的响应（带提示数据）
      */
-    public static <T> Result<T> confirm(String message, String confirmToken, T data) {
+    public static <T> Result<T> confirm(String message, T data, String confirmToken) {
         return new Result<>(ResultCode.CONFIRM.getCode(), message, data, ResultType.CONFIRM, confirmToken);
     }
 
