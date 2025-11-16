@@ -89,6 +89,13 @@ public class Result<T> implements Serializable {
     }
 
     /**
+     * 成功响应（自定义消息）
+     */
+    public static <T> Result<T> ok(String message) {
+        return new Result<>(ResultCode.SUCCESS.getCode(), message, null, ResultType.SUCCESS);
+    }
+
+    /**
      * 成功响应（带数据）
      */
     public static <T> Result<T> ok(T data) {
@@ -96,7 +103,7 @@ public class Result<T> implements Serializable {
     }
 
     /**
-     * 成功响应（自定义消息）
+     * 成功响应（自定义消息和数据）
      */
     public static <T> Result<T> ok(String message, T data) {
         return new Result<>(ResultCode.SUCCESS.getCode(), message, data, ResultType.SUCCESS);
