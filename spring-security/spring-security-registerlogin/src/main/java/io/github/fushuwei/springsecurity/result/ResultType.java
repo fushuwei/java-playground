@@ -8,22 +8,22 @@ package io.github.fushuwei.springsecurity.result;
 public enum ResultType {
 
     /**
-     * 成功
+     * 成功类型
      */
     SUCCESS,
 
     /**
-     * 警告
+     * 警告类型
      */
     WARNING,
 
     /**
-     * 二次确认
+     * 二次确认类型
      */
     CONFIRM,
 
     /**
-     * 失败
+     * 失败或错误类型
      */
     FAILURE,
 }

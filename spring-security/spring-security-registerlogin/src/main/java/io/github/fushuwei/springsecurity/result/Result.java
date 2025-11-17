@@ -37,6 +37,7 @@ public class Result<T> implements Serializable {
     /**
      * 响应数据
      */
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     private T data;
 
     /**
