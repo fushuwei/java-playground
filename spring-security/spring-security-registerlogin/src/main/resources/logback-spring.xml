@@ -4,7 +4,7 @@
     <springProperty name="APP_NAME" source="spring.application.name" defaultValue="application"/>
 
     <!-- 日志路径 -->
-    <property name="LOG_PATH" value="${LOG_PATH:-logs/${APP_NAME}}"/>
+    <property name="LOG_PATH" value="${LOG_PATH:-./logs/${APP_NAME}}"/>
     <!-- 应用名称 -->
     <property name="APP_NAME" value="${APP_NAME}"/>
     <!-- 日志模式 -->
