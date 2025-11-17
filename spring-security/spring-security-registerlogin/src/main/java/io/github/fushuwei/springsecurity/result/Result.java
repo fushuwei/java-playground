@@ -41,16 +41,6 @@ public class Result<T> implements Serializable {
     private T data;
 
     /**
-     * 时间戳
-     */
-    private LocalDateTime timestamp;
-
-    /**
-     * 请求ID，用于链路追踪
-     */
-    private String requestId;
-
-    /**
      * 响应类型：SUCCESS, WARNING, CONFIRM, FAILURE
      */
     private ResultType type;
@@ -60,9 +50,19 @@ public class Result<T> implements Serializable {
      */
     private String confirmToken;
 
+    /**
+     * 请求ID，用于链路追踪
+     */
+    private String requestId;
+
+    /**
+     * 时间戳
+     */
+    private LocalDateTime timestamp;
+
     public Result() {
-        this.timestamp = LocalDateTime.now();
         this.requestId = MDC.get(MDC_KEY_REQUEST_ID);
+        this.timestamp = LocalDateTime.now();
     }
 
     public Result(Integer code, String message, T data, ResultType type) {
