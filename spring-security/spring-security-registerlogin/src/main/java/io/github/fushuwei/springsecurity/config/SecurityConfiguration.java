@@ -1,5 +1,6 @@
 package io.github.fushuwei.springsecurity.config;
 
+import io.github.fushuwei.springsecurity.handler.CustomAuthenticationFailureHandler;
 import io.github.fushuwei.springsecurity.handler.CustomAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,8 @@ public class SecurityConfiguration {
 
     @Autowired
     private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    @Autowired
+    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
     /**
      * 自定义 SecurityFilterChain
@@ -32,7 +35,8 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests((requests) -> requests.anyRequest().authenticated())
-            .formLogin(form -> form.successHandler(customAuthenticationSuccessHandler))
+            .formLogin(form -> form.successHandler(customAuthenticationSuccessHandler)
+                .failureHandler(customAuthenticationFailureHandler))
             .httpBasic(AbstractHttpConfigurer::disable)  // 关闭弹窗
             .csrf(AbstractHttpConfigurer::disable)  // 禁用 CSRF
             .build();
