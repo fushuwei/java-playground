@@ -6,7 +6,6 @@ import org.slf4j.MDC;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * 响应结果
@@ -20,9 +19,6 @@ public class Result<T> implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-
-    private static final String HEADER_REQUEST_ID = "X-Request-ID";
-    private static final String MDC_KEY_REQUEST_ID = "requestId";
 
     /**
      * 状态码
@@ -58,11 +54,11 @@ public class Result<T> implements Serializable {
     /**
      * 时间戳
      */
-    private LocalDateTime timestamp;
+    private Long timestamp;
 
     public Result() {
-        this.requestId = MDC.get(MDC_KEY_REQUEST_ID);
-        this.timestamp = LocalDateTime.now();
+        this.requestId = MDC.get("requestId");  // X-Request-ID
+        this.timestamp = System.currentTimeMillis();
     }
 
     public Result(Integer code, String message, T data, ResultType type) {
