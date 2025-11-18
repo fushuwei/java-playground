@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import io.github.fushuwei.springsecurity.entity.UserDO;
 import io.github.fushuwei.springsecurity.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsPasswordService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsManager, UserDetails
             throw new UsernameNotFoundException(username);
         }
 
-        return org.springframework.security.core.userdetails.User.builder()
+        return User.builder()
             .username(user.getUsername())
             .password(user.getPassword())
             .build();
