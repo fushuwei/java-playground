@@ -12,6 +12,7 @@
     <description>Java 练习场项目</description>
 
     <modules>
+        <module>javatime</module>
         <module>jdbc</module>
         <module>spring-security</module>
     </modules>
