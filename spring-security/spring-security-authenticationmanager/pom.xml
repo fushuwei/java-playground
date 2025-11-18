@@ -10,10 +10,10 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>spring-security-registerlogin</artifactId>
+    <artifactId>spring-security-authenticationmanager</artifactId>
     <packaging>jar</packaging>
-    <name>Spring Security RegisterLogin</name>
-    <description>模拟用户注册和登录</description>
+    <name>Spring Security AuthenticationManager</name>
+    <description>自定义认证管理器</description>
 
     <dependencies>
         <!-- Spring Boot Starter Web -->
