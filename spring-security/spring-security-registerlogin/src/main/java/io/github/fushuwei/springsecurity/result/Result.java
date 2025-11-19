@@ -7,6 +7,7 @@ import org.slf4j.MDC;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * 响应结果
@@ -58,11 +59,17 @@ public class Result<T> implements Serializable {
      */
     private Long timestamp;
 
+    /**
+     * 构造方法
+     */
     private Result() {
         this.requestId = MDC.get("requestId");  // X-Request-ID
         this.timestamp = System.currentTimeMillis();
     }
 
+    /**
+     * 构造方法
+     */
     private Result(Integer code, String message, T data, ResultType type) {
         this();
         this.code = code;
@@ -71,6 +78,9 @@ public class Result<T> implements Serializable {
         this.type = type;
     }
 
+    /**
+     * 构造方法
+     */
     private Result(Integer code, String message, T data, ResultType type, String confirmToken) {
         this();
         this.code = code;
@@ -162,5 +172,12 @@ public class Result<T> implements Serializable {
      */
     public static <T> Result<T> of(Integer code, String message, T data, ResultType type, String confirmToken) {
         return new Result<>(code, message, data, type, confirmToken);
+    }
+
+    /**
+     * 判断请求是否成功
+     */
+    public Boolean isSuccess() {
+        return Objects.equals(ResultType.SUCCESS, this.type) && Objects.equals(ResultCode.SUCCESS.getCode(), this.code);
     }
 }
