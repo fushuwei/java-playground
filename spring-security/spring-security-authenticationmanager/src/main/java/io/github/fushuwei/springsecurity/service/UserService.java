@@ -6,5 +6,5 @@ import io.github.fushuwei.springsecurity.model.entity.UserDO;
 
 public interface UserService extends IService<UserDO> {
 
-    String login(UserDTO userDto);
+    void login(UserDTO userDto);
 }

@@ -18,6 +18,7 @@ public class UserController {
 
     @PostMapping("/login")
     public Result<?> login(@RequestBody UserDTO userDto) throws Exception {
-        return Result.ok(userService.login(userDto), "登录成功");
+        userService.login(userDto);
+        return Result.ok("登录成功");
     }
 }
