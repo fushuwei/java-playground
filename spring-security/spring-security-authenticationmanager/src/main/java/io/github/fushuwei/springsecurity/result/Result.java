@@ -2,6 +2,7 @@ package io.github.fushuwei.springsecurity.result;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.slf4j.MDC;
 
 import java.io.Serial;
@@ -14,6 +15,7 @@ import java.io.Serializable;
  * @author fushuwei
  */
 @Data
+@Accessors(fluent = true, chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Result<T> implements Serializable {
 
