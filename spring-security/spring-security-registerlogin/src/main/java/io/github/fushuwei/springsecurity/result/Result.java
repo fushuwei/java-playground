@@ -102,7 +102,7 @@ public class Result<T> implements Serializable {
     /**
      * 成功响应（自定义消息和数据）
      */
-    public static <T> Result<T> ok(String message, T data) {
+    public static <T> Result<T> ok(T data, String message) {
         return new Result<>(ResultCode.SUCCESS.getCode(), message, data, ResultType.SUCCESS);
     }
 
@@ -130,7 +130,7 @@ public class Result<T> implements Serializable {
     /**
      * 警告响应（带数据）
      */
-    public static <T> Result<T> warn(String message, T data) {
+    public static <T> Result<T> warn(T data, String message) {
         return new Result<>(ResultCode.WARNING.getCode(), message, data, ResultType.WARNING);
     }
 
@@ -144,7 +144,7 @@ public class Result<T> implements Serializable {
     /**
      * 需要二次确认的响应（带提示数据）
      */
-    public static <T> Result<T> confirm(String message, T data, String confirmToken) {
+    public static <T> Result<T> confirm(T data, String message, String confirmToken) {
         return new Result<>(ResultCode.CONFIRM.getCode(), message, data, ResultType.CONFIRM, confirmToken);
     }
 
