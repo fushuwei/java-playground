@@ -18,7 +18,7 @@ spring:
     # 指定日期时间的格式
     date-format: yyyy-MM-dd HH:mm:ss
     # 将 Java 的驼峰命名（userName）转换为 JSON 的下划线命名（user_name），可选值：SNAKE_CASE, LOWER_CAMEL_CASE (默认), UPPER_CAMEL_CASE, KEBAB_CASE
-    property-naming-strategy: SNAKE_CASE
+    property-naming-strategy: LOWER_CAMEL_CASE
     # 指定时区，生产环境设置为 UTC，避免因服务器时区不同导致的时间混乱
     time-zone: UTC
     # 序列化时，忽略值为 null 的字段，精简 JSON，减少网络传输
