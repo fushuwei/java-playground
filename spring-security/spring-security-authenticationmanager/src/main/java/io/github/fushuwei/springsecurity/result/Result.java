@@ -1,6 +1,8 @@
 package io.github.fushuwei.springsecurity.result;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.slf4j.MDC;
@@ -26,37 +28,44 @@ public class Result<T> implements Serializable {
     /**
      * 状态码
      */
+    @JsonProperty("code")
     private Integer code;
 
     /**
      * 响应消息
      */
+    @JsonProperty("message")
     private String message;
 
     /**
      * 响应数据
      */
+    @JsonProperty("data")
     @JsonInclude(JsonInclude.Include.ALWAYS)
     private T data;
 
     /**
      * 响应类型：SUCCESS, WARNING, CONFIRM, FAILURE
      */
+    @JsonProperty("type")
     private ResultType type;
 
     /**
      * 二次确认时的令牌，前端需要在确认时回传，防止重放攻击和确保操作的一致性
      */
+    @JsonProperty("confirmToken")
     private String confirmToken;
 
     /**
      * 请求ID，用于链路追踪
      */
+    @JsonProperty("requestId")
     private String requestId;
 
     /**
      * 时间戳
      */
+    @JsonProperty("timestamp")
     private Long timestamp;
 
     /**
@@ -177,6 +186,7 @@ public class Result<T> implements Serializable {
     /**
      * 判断请求是否成功
      */
+    @JsonIgnore
     public Boolean isSuccess() {
         return Objects.equals(ResultType.SUCCESS, this.type) && Objects.equals(ResultCode.SUCCESS.getCode(), this.code);
     }

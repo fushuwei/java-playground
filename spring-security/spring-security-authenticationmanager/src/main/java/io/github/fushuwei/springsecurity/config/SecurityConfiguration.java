@@ -19,18 +19,16 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/user/login").permitAll()
+        return http.authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/user/**").permitAll()
                 .anyRequest().authenticated())
             .formLogin(AbstractHttpConfigurer::disable)
             .csrf(AbstractHttpConfigurer::disable)
-        ;
-        return http.build();
+            .build();
     }
 
     @Bean
-    public AuthenticationManager authenticationManager() throws Exception {
+    public AuthenticationManager authenticationManager() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
         return new ProviderManager(provider);
     }

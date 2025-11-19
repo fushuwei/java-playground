@@ -20,7 +20,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
 
     @Override
     public String login(UserDTO userDTO) {
-
         // 获取登录用户名和密码
         String username = userDTO.getUsername();
         String password = userDTO.getPassword();
@@ -34,8 +33,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         // 判断认证是否通过
         if (authentication.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            return "用户 " + authentication.getName() + " 登录成功";
         }
 
-        return "aaabbb";
+        return null;
     }
 }
