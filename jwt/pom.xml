@@ -17,6 +17,7 @@
 
     <modules>
         <module>jjwt</module>
+        <module>nimbus-jose-jwt</module>
     </modules>
 
     <properties>
