@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class JwtDemo {
 
     // 密钥：用于签名和验证 JWT 的密钥，必须是 256 位 (32 字节)
-    private static final byte[] SECRET_KEY = "2HUJ8CsMBZbpBBouLaJTeofgt518Sr6N6rB+VP2+k453WlMPlhRoWP1EMBRpAMMjELHj5BSoFucBb/na2uFuiw==".getBytes();
+    private static final byte[] SECRET_KEY = "1234567890abcdefghijklmnopqrstuvwxyz0987654321".getBytes();
 
     // 签发者
     private static final String ISSUER = "io.github.fushuwei.jwt";

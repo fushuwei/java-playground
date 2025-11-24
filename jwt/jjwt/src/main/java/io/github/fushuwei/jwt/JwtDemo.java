@@ -1,6 +1,7 @@
 package io.github.fushuwei.jwt;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
@@ -14,8 +15,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class JwtDemo {
 
-    // 密钥：用于签名和验证 JWT 的密钥，必须保密且足够长，推荐使用 Jwts.SIG.HS256
-    private static final SecretKey JJWT_SECRET_KEY = Jwts.SIG.HS256.key().build();
+    // 密钥：用于签名和验证 JWT 的密钥，必须保密且足够长
+    private static final SecretKey SECRET_KEY = Keys.hmacShaKeyFor("1234567890abcdefghijklmnopqrstuvwxyz0987654321".getBytes());
 
     // 签发者
     private static final String ISSUER = "io.github.fushuwei.jwt";
@@ -41,21 +42,21 @@ public class JwtDemo {
 
         // 创建 JWT Builder
         JwtBuilder builder = Jwts.builder()
-                // 1. Header (头部): 默认包含 "typ":"JWT", "alg":"HS256"
-                // 2. Payload (载荷): 包含 Claims (声明)
+            // 1. Header (头部): 默认包含 "typ":"JWT", "alg":"HS256"
+            // 2. Payload (载荷): 包含 Claims (声明)
 
-                // 注册声明 (Registered Claims)
-                .issuer(ISSUER) // iss: 签发者
-                .subject(userId) // sub: 主题 (通常是用户ID)
-                .issuedAt(now) // iat: 签发时间
-                .expiration(expiration) // exp: 过期时间
+            // 注册声明 (Registered Claims)
+            .issuer(ISSUER) // iss: 签发者
+            .subject(userId) // sub: 主题 (通常是用户ID)
+            .issuedAt(now) // iat: 签发时间
+            .expiration(expiration) // exp: 过期时间
 
-                // 公共声明 (Public Claims) 或 私有声明 (Private Claims)
-                .claim("username", username) // 自定义声明：用户名
-                .claim("roles", new String[]{"USER", "ADMIN"}) // 自定义声明：角色列表
+            // 公共声明 (Public Claims) 或 私有声明 (Private Claims)
+            .claim("username", username) // 自定义声明：用户名
+            .claim("roles", new String[]{"USER", "ADMIN"}) // 自定义声明：角色列表
 
-                // 3. Signature (签名): 使用密钥和算法进行签名
-                .signWith(JJWT_SECRET_KEY, Jwts.SIG.HS256); // 使用 HS256 算法和密钥签名
+            // 3. Signature (签名): 使用密钥和算法进行签名
+            .signWith(SECRET_KEY, Jwts.SIG.HS256); // 使用 HS256 算法和密钥签名
 
         // 压缩并序列化成紧凑的 JWT 字符串
         return builder.compact();
@@ -70,9 +71,9 @@ public class JwtDemo {
     public static Claims validateJjwtToken(String token) {
         // 创建 JWT 解析器
         JwtParser parser = Jwts.parser()
-                .verifyWith(JJWT_SECRET_KEY)  // 设置用于验证签名的密钥
-                .requireIssuer(ISSUER)  // 要求签发者必须是指定的值
-                .build();
+            .verifyWith(SECRET_KEY)  // 设置用于验证签名的密钥
+            .requireIssuer(ISSUER)  // 要求签发者必须是指定的值
+            .build();
 
         // 解析并验证 JWT
         Jws<Claims> jws = parser.parseSignedClaims(token);
@@ -90,9 +91,9 @@ public class JwtDemo {
     public static String refreshJjwtToken(String token) {
         // 1. 验证 Token 是否有效
         JwtParser parser = Jwts.parser()
-                .verifyWith(JJWT_SECRET_KEY)  // 设置用于验证签名的密钥
-                .requireIssuer(ISSUER)  // 要求签发者必须是指定的值
-                .build();
+            .verifyWith(SECRET_KEY)  // 设置用于验证签名的密钥
+            .requireIssuer(ISSUER)  // 要求签发者必须是指定的值
+            .build();
 
         // 仅解析，不验证过期时间
         Claims claims = parser.parseSignedClaims(token).getPayload();
@@ -126,21 +127,21 @@ public class JwtDemo {
 
         // 创建 JWT Builder
         JwtBuilder builder = Jwts.builder()
-                // 1. Header (头部): 默认包含 "typ":"JWT", "alg":"HS256"
-                // 2. Payload (载荷): 包含 Claims (声明)
+            // 1. Header (头部): 默认包含 "typ":"JWT", "alg":"HS256"
+            // 2. Payload (载荷): 包含 Claims (声明)
 
-                // 注册声明 (Registered Claims)
-                .issuer(ISSUER) // iss: 签发者
-                .subject(userId) // sub: 主题 (通常是用户ID)
-                .issuedAt(now) // iat: 签发时间
-                .expiration(expiration) // exp: 过期时间
+            // 注册声明 (Registered Claims)
+            .issuer(ISSUER) // iss: 签发者
+            .subject(userId) // sub: 主题 (通常是用户ID)
+            .issuedAt(now) // iat: 签发时间
+            .expiration(expiration) // exp: 过期时间
 
-                // 公共声明 (Public Claims) 或 私有声明 (Private Claims)
-                .claim("username", username) // 自定义声明：用户名
-                .claim("roles", new String[]{"USER", "ADMIN"}) // 自定义声明：角色列表
+            // 公共声明 (Public Claims) 或 私有声明 (Private Claims)
+            .claim("username", username) // 自定义声明：用户名
+            .claim("roles", new String[]{"USER", "ADMIN"}) // 自定义声明：角色列表
 
-                // 3. Signature (签名): 使用密钥和算法进行签名
-                .signWith(JJWT_SECRET_KEY, Jwts.SIG.HS256); // 使用 HS256 算法和密钥签名
+            // 3. Signature (签名): 使用密钥和算法进行签名
+            .signWith(SECRET_KEY, Jwts.SIG.HS256); // 使用 HS256 算法和密钥签名
 
         // 压缩并序列化成紧凑的 JWT 字符串
         return builder.compact();
