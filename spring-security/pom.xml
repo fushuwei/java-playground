@@ -36,10 +36,10 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Spring Boot 版本 -->
-        <spring-boot.version>3.5.7</spring-boot.version>
+        <spring-boot.version>4.0.0</spring-boot.version>
 
         <!-- Spring Cloud 版本 -->
-        <spring-cloud.version>2025.0.0</spring-cloud.version>
+        <spring-cloud.version>2025.1.0</spring-cloud.version>
 
         <!-- Spring Cloud Alibaba 版本 -->
         <spring-cloud-alibaba.version>2025.0.0.0</spring-cloud-alibaba.version>
