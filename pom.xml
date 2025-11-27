@@ -14,6 +14,7 @@
     <modules>
         <module>javatime</module>
         <module>jdbc</module>
+        <module>jwt</module>
         <module>spring-security</module>
     </modules>
 
