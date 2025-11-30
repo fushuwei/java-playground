@@ -47,3 +47,9 @@ spring:
         useLocalSessionState: true
         # 是否维护时间统计信息，关闭后可略微提升性能
         maintainTimeStats: false
+  sql:
+    init:
+      schema-locations: classpath:db/schema.sql
+      data-locations: classpath:db/data.sql
+      continue-on-error: true
+      mode: always
