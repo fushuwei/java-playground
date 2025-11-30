@@ -1,2 +1,49 @@
 server:
   port: 8080
+
+spring:
+  application:
+    name: spring-security-simple
+  datasource:
+    # JDBC 驱动类
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # JDBC URL
+    url: jdbc:mysql://localhost:3306/spring_security?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    # 数据库用户名
+    username: root
+    # 数据库密码
+    password: 123456
+    # HikariCP 连接池配置
+    hikari:
+      # 连接池的名称，用于日志和监控
+      pool-name: HikariCP-${spring.application.name}
+      # 连接池的最大连接数
+      maximum-pool-size: 30
+      # 连接池的最小空闲连接数
+      minimum-idle: 10
+      # 连接的超时时间（毫秒），默认 30000 (30秒)，如果在指定时间内无法从连接池获取到连接，则会抛出 SQLException
+      connection-timeout: 30000
+      # 空闲连接的超时时间（毫秒），默认 600000 (10分钟)，一个连接空闲超过这个时间，则会被回收
+      idle-timeout: 600000
+      # 连接的最大生命周期（毫秒），默认 1740000 (29分钟)，空闲连接超时后由池回收，使用中的连接归还时若超时则丢弃
+      max-lifetime: 1740000
+      # 连接泄漏检测阈值（毫秒），超过 60000 (60秒) 未归还连接就打印警告，生产环境不建议开启，当系统存在长时间的数据库操作时，会产生大量日志噪音
+      leak-detection-threshold: 60000
+      # 连接测试查询语句，用于验证连接是否有效
+      connection-test-query: SELECT 1
+      # 数据源属性配置，用于优化数据库连接性能
+      data-source-properties:
+        # 是否缓存预编译语句，开启后可提高执行效率
+        cachePrepStmts: true
+        # 预编译语句缓存大小，控制缓存中预编译语句的数量
+        prepStmtCacheSize: 250
+        # 预编译语句SQL长度限制，避免缓存过大的SQL语句
+        prepStmtCacheSqlLimit: 2048
+        # 是否使用服务器端预编译语句，减少网络传输和解析开销
+        useServerPrepStmts: true
+        # 是否重写批处理语句，将多个INSERT语句合并为单个语句发送到数据库
+        rewriteBatchedStatements: true
+        # 是否使用本地会话状态，减少与服务器的交互次数
+        useLocalSessionState: true
+        # 是否维护时间统计信息，关闭后可略微提升性能
+        maintainTimeStats: false
