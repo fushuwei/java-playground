@@ -1,17 +1,19 @@
 package io.github.fushuwei.springsecurity;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.fushuwei.springsecurity.entity.UserDO;
 import io.github.fushuwei.springsecurity.result.Result;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import tools.jackson.databind.ObjectMapper;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Slf4j
 @SpringBootTest
@@ -42,6 +44,23 @@ public class ResultTest {
     @Test
     public void fail() {
         log.info("测试 Result.fail()\n{}", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(Result.fail("系统繁忙，请稍后重试")));
+    }
+
+    @Test
+    public void object2Json() {
+        UserDO user = new UserDO();
+        user.setId(1234567890L);
+        user.setUsername("admin");
+        user.setPassword("123456");
+        user.setNickname("管理员");
+        user.setRealname("管理员");
+        user.setAge(18);
+        user.setEmail("admin@example.com");
+        user.setCreateTime(new Date());
+        user.setUpdateTime(LocalDateTime.now());
+        user.setDeleteTime(Instant.now());
+
+        log.info("用户对象: {}", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(user));
     }
 
     @Test

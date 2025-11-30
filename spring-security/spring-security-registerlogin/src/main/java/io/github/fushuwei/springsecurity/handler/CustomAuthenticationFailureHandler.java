@@ -1,6 +1,5 @@
 package io.github.fushuwei.springsecurity.handler;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.fushuwei.springsecurity.result.Result;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
+import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.io.PrintWriter;

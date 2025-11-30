@@ -26,6 +26,8 @@
         <module>spring-security-registerlogin</module>
         <!-- 自定义认证管理器 -->
         <module>spring-security-authenticationmanager</module>
+        <!-- 一个基于 Spring Security 的简单示例 -->
+        <module>spring-security-simple</module>
     </modules>
 
     <properties>

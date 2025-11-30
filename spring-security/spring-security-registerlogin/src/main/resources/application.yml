@@ -25,8 +25,10 @@ spring:
     default-property-inclusion: non_null
     # 序列化配置
     serialization:
+      # 美化输出，增加可读性，生产环境建议关闭
+      indent-output: true
       # 禁止将日期序列化为时间戳，而是使用人类可读的字符串格式
-      write-dates-as-timestamps: false
+      # write-dates-as-timestamps: true
       # 防止序列化没有属性的空对象时抛出异常，增加健壮性
       fail-on-empty-beans: false
     # 反序列化配置
