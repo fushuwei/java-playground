@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+    <!-- 从 application.yml 配置中获取应用名称 -->
+    <springProperty name="APP_NAME" source="spring.application.name" defaultValue="application"/>
+
+    <!-- 日志路径 -->
+    <property name="LOG_PATH" value="${LOG_PATH:-./logs/${APP_NAME}}"/>
+    <!-- 应用名称 -->
+    <property name="APP_NAME" value="${APP_NAME}"/>
+    <!-- 日志模式 -->
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n"/>
+
+    <!-- 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- INFO 级别日志文件 -->
+    <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${APP_NAME}-info.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}/${APP_NAME}-info.%i.log</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!-- 排除 ERROR 级别日志 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+    </appender>
+
+    <!-- ERROR 级别日志文件 -->
+    <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${APP_NAME}-error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}/${APP_NAME}-error.%i.log</fileNamePattern>
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!-- 匹配日志级别等于或大于 ERROR 的日志（ TRACE < DEBUG < INFO < WARN < ERROR < FATAL ） -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!-- 匹配 ERROR 和 FATAL 级别日志 -->
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+    <!-- 异步 INFO 级别日志文件输出 -->
+    <appender name="ASYNC_INFO" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>512</queueSize>
+        <appender-ref ref="FILE_INFO"/>
+    </appender>
+
+    <!-- 异步 ERROR 级别日志文件输出 -->
+    <appender name="ASYNC_ERROR" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>512</queueSize>
+        <appender-ref ref="FILE_ERROR"/>
+    </appender>
+
+    <!-- 当前项目框架日志级别配置 -->
+    <logger name="io.github.fushuwei" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ASYNC_INFO"/>
+        <appender-ref ref="ASYNC_ERROR"/>
+    </logger>
+
+    <!-- 第三方框架日志级别配置 -->
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="com.zaxxer.hikari" level="INFO"/>
+    <logger name="org.apache.kafka" level="WARN"/>
+    <logger name="org.mybatis" level="WARN"/>
+
+    <!-- 根日志配置 -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ASYNC_INFO"/>
+        <appender-ref ref="ASYNC_ERROR"/>
+    </root>
+</configuration>
