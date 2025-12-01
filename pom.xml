@@ -21,4 +21,24 @@
     <properties>
         <revision>1.0.0-SNAPSHOT</revision>
     </properties>
+
+    <build>
+        <resources>
+            <!-- 普通资源，不开启过滤 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>banner.txt</exclude>
+                </excludes>
+            </resource>
+            <!-- 单独处理 banner.txt -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>banner.txt</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
 </project>
