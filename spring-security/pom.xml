@@ -49,6 +49,9 @@
         <!-- Mybatis Plus 版本 -->
         <mybatis-plus.version>3.5.14</mybatis-plus.version>
 
+        <!-- Redisson 版本 -->
+        <redisson.version>3.52.0</redisson.version>
+
         <!-- Lombok -->
         <lombok.version>1.18.42</lombok.version>
 
@@ -93,6 +96,13 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <!-- Redisson -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
             </dependency>
 
             <!-- Lombok -->

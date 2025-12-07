@@ -1,9 +1,15 @@
+# 服务器配置
 server:
+  # 服务端口
   port: 8080
 
+# Spring 配置
 spring:
+  # 应用配置
   application:
+    # 应用名称
     name: spring-security-simple
+  # 数据源配置
   datasource:
     # JDBC 驱动类
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -47,9 +53,39 @@ spring:
         useLocalSessionState: true
         # 是否维护时间统计信息，关闭后可略微提升性能
         maintainTimeStats: false
+  # Redis 配置
+  data:
+    redis:
+      # Redis 服务器地址
+      host: localhost
+      # Redis 服务器端口
+      port: 6379
+      # Redis 数据库索引
+      database: 0
+      # Redis 服务器密码（默认为空）
+      password: 123456
+      # 连接超时时间（毫秒）
+      timeout: 2000
+      # Lettuce 连接池配置
+      lettuce:
+        pool:
+          # 连接池最大连接数
+          max-active: 8
+          # 连接池最大阻塞等待时间（负值表示无限制）
+          max-wait: -1
+          # 连接池最大空闲连接数
+          max-idle: 8
+          # 连接池最小空闲连接数
+          min-idle: 0
+  # SQL 配置
   sql:
+    # 初始化配置
     init:
+      # schema 脚本位置，用于初始化数据库表结构
       schema-locations: classpath:db/schema.sql
+      # data 脚本位置，用于初始化数据库数据
       data-locations: classpath:db/data.sql
+      # 是否在发生错误时继续执行后续脚本
       continue-on-error: true
+      # 初始化模式，always 表示每次启动都执行初始化脚本
       mode: always
