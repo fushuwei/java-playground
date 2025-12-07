@@ -18,6 +18,7 @@
     <modules>
         <module>sca-skeleton-common</module>
         <module>sca-skeleton-gateway</module>
+        <module>sca-skeleton-auth</module>
         <module>sca-skeleton-system</module>
     </modules>
 
