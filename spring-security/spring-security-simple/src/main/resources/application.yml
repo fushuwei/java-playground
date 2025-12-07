@@ -89,3 +89,25 @@ spring:
       continue-on-error: true
       # 初始化模式，always 表示每次启动都执行初始化脚本
       mode: always
+
+# redisson:
+#   # 单机模式
+#   singleServerConfig:
+#     address: "redis://127.0.0.1:6379"
+#     password: "123456"
+#     database: 0
+#     connectionPoolSize: 64
+#     connectionMinimumIdleSize: 10
+#   # 哨兵模式
+#   sentinelServersConfig:
+#     masterName: "mymaster"
+#     sentinelAddresses:
+#       - "redis://127.0.0.1:26379"
+#     password: "123456"
+#     database: 0
+#   # 集群模式
+#   clusterServersConfig:
+#     nodeAddresses:
+#       - "redis://127.0.0.1:7000"
+#       - "redis://127.0.0.1:7001"
+#     password: "123456"
