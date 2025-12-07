@@ -16,6 +16,7 @@
     <description>Spring Cloud Alibaba 骨架项目</description>
 
     <modules>
+        <module>sca-skeleton-common</module>
     </modules>
 
     <properties>
