@@ -17,6 +17,7 @@
 
     <modules>
         <module>sca-skeleton-common</module>
+        <module>sca-skeleton-gateway</module>
     </modules>
 
     <properties>
